@@ -5,9 +5,9 @@
   "main": "dist/vue3-filters.js",
   "types": "types/index.d.ts",
   "scripts": {
-    "build": "node_modules/.bin/webpack --mode=production",
-    "dev": "node_modules/.bin/webpack --mode=development --watch",
-    "test": "node_modules/.bin/karma start test/karma.conf.js --single-run --no-auto-watch"
+    "build": "NODE_OPTIONS=--openssl-legacy-provider node_modules/.bin/webpack --mode=production",
+    "dev": "NODE_OPTIONS=--openssl-legacy-provider node_modules/.bin/webpack --mode=development --watch",
+    "test": "NODE_OPTIONS=--openssl-legacy-provider node_modules/.bin/karma start test/karma.conf.js --single-run --no-auto-watch"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"

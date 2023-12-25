@@ -1,9 +1,8 @@
-import Vue, { PluginFunction, PluginObject } from "vue";
+import { Plugin } from "vue";
 
-declare const Vue2Filters: Vue2Filters;
-export default Vue2Filters;
-export interface Vue2Filters extends PluginObject<Vue2FiltersUseOptions> {
-  install: PluginFunction<Vue2FiltersUseOptions>;
+declare const Vue3Filters: Vue3Filters;
+export default Vue3Filters;
+export type Vue3Filters = {
   mixin: {
     methods: {
       limitBy: (arr: any, n: number, offset: number) => any;
@@ -12,6 +11,6 @@ export interface Vue2Filters extends PluginObject<Vue2FiltersUseOptions> {
       find: (arr: any[], search: string | number, ...args: any[]) => any;
     };
   };
-}
+} & Plugin<Vue3FiltersUseOptions>
 
-export interface Vue2FiltersUseOptions {}
+export interface Vue3FiltersUseOptions {}

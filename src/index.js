@@ -3,24 +3,15 @@ import * as stringFilters from './string/index'
 import * as arrayFilters from './array/index'
 import * as otherFilters from './other/index'
 
-var Vue2Filters = {
-  install: function(Vue, options) {
-    util.each(stringFilters, function(value, key) {
-      Vue.filter(key, value.bind(options))
-    })
-
-    util.each(otherFilters, function(value, key) {
-      Vue.filter(key, value.bind(options))
-    })
-  },
+const Vue3Filters = {
+  install: function (Vue, options) {},
   mixin: {
-    methods: { ...arrayFilters }
+    methods: {...arrayFilters}
   }
-}
+};
 
-export default Vue2Filters;
+export default Vue3Filters;
 
-if (typeof window !== 'undefined' && window.Vue) {
-  window.Vue.use(Vue2Filters);
-  window.Vue2Filters = Vue2Filters;
+if (typeof window !== 'undefined') {
+  window.Vue3Filters = Vue3Filters;
 }

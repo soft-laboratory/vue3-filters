@@ -1,4 +1,4 @@
-# vue2-filters [![Build Status](https://app.travis-ci.com/freearhey/vue2-filters.svg?branch=master)](https://app.travis-ci.com/freearhey/vue2-filters)
+# vue3-filters [![Build Status](https://app.travis-ci.com/freearhey/vue3-filters.svg?branch=master)](https://app.travis-ci.com/freearhey/vue3-filters)
 
 A collection Vue.js filters.
 
@@ -6,69 +6,69 @@ A collection Vue.js filters.
 
 ### Direct include
 
-Simply include `vue2-filters` after Vue and it will install itself automatically:
+Simply include `vue3-filters` after Vue and it will install itself automatically:
 
 ```html
 <script src="vue.js"></script>
-<script src="vue2-filters.min.js"></script>
+<script src="vue3-filters.min.js"></script>
 ```
 
-To use one of the predefined methods (such as `limitBy`, `filterBy`, `find`, or `orderBy`) in your component, you also need to add `Vue2Filters.mixin` to mixin list:
+To use one of the predefined methods (such as `limitBy`, `filterBy`, `find`, or `orderBy`) in your component, you also need to add `Vue3Filters.mixin` to mixin list:
 
 ```html
 <script>
   new Vue({
     ...
-    mixins: [Vue2Filters.mixin],
+    mixins: [Vue3Filters.mixin],
     ...
   })
 </script>
 ```
 
-### CDN [![jsDelivr Hits](https://data.jsdelivr.com/v1/package/npm/vue2-filters/badge?style=rounded)](https://www.jsdelivr.com/package/npm/vue2-filters)
+### CDN [![jsDelivr Hits](https://data.jsdelivr.com/v1/package/npm/vue3-filters/badge?style=rounded)](https://www.jsdelivr.com/package/npm/vue3-filters)
 
 ```html
 <script src="https://unpkg.com/vue/dist/vue.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/vue2-filters/dist/vue2-filters.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue3-filters/dist/vue3-filters.min.js"></script>
 ```
 
-To use one of the predefined methods (such as `limitBy`, `filterBy`, `find`, or `orderBy`) in your component, you also need to add `Vue2Filters.mixin` to mixin list:
+To use one of the predefined methods (such as `limitBy`, `filterBy`, `find`, or `orderBy`) in your component, you also need to add `Vue3Filters.mixin` to mixin list:
 
 ```html
 <script>
   new Vue({
     ...
-    mixins: [Vue2Filters.mixin],
+    mixins: [Vue3Filters.mixin],
     ...
   })
 </script>
 ```
 
-### NPM [![npm](https://img.shields.io/npm/dm/vue2-filters.svg)](https://www.npmjs.com/package/vue2-filters)
+### NPM [![npm](https://img.shields.io/npm/dm/vue3-filters.svg)](https://www.npmjs.com/package/vue3-filters)
 
 ```
-npm install vue2-filters
+npm install vue3-filters
 ```
 
 When used with a module system, you must explicitly install the filters via `Vue.use()`:
 
 ```js
 import Vue from 'vue'
-import Vue2Filters from 'vue2-filters'
+import Vue3Filters from 'vue3-filters'
 
-Vue.use(Vue2Filters)
+Vue.use(Vue3Filters)
 ```
 
 You don't need to do this when using global script tags.
 
-To use one of the predefined methods (such as `limitBy`, `filterBy`, `find`, or `orderBy`) in your component, you also need to add `Vue2Filters.mixin` to mixin list:
+To use one of the predefined methods (such as `limitBy`, `filterBy`, `find`, or `orderBy`) in your component, you also need to add `Vue3Filters.mixin` to mixin list:
 
 ```js
-import Vue2Filters from 'vue2-filters'
+import Vue3Filters from 'vue3-filters'
 
 export default {
   ...
-  mixins: [Vue2Filters.mixin],
+  mixins: [Vue3Filters.mixin],
   ...
 }
 ```
@@ -76,16 +76,16 @@ export default {
 ### Nuxt.js
 
 ```
-npm install vue2-filters
+npm install vue3-filters
 ```
 
-When create file `plugins/vue2-filters.js`:
+When create file `plugins/vue3-filters.js`:
 
 ```js
 import Vue from 'vue'
-import Vue2Filters from 'vue2-filters'
+import Vue3Filters from 'vue3-filters'
 
-Vue.use(Vue2Filters)
+Vue.use(Vue3Filters)
 ```
 
 Then, add the file inside the `plugins` key of `nuxt.config.js`:
@@ -94,20 +94,20 @@ Then, add the file inside the `plugins` key of `nuxt.config.js`:
 module.exports = {
   //...
   plugins: [
-    '~/plugins/vue2-filters'
+    '~/plugins/vue3-filters'
   ],
   //...
 }
 ```
 
-To use one of the predefined methods (such as `limitBy`, `filterBy`, `find`, or `orderBy`) in your component, you also need to add `Vue2Filters.mixin` to mixin list:
+To use one of the predefined methods (such as `limitBy`, `filterBy`, `find`, or `orderBy`) in your component, you also need to add `Vue3Filters.mixin` to mixin list:
 
 ```js
-import Vue2Filters from 'vue2-filters'
+import Vue3Filters from 'vue3-filters'
 
 export default {
   ...
-  mixins: [Vue2Filters.mixin],
+  mixins: [Vue3Filters.mixin],
   ...
 }
 ```
@@ -555,9 +555,9 @@ If you need to override filter options globally you can do so by passing an obje
 
 ```js
 import Vue from 'vue'
-import Vue2Filters from 'vue2-filters'
+import Vue3Filters from 'vue3-filters'
 
-var Vue2FiltersConfig = {
+var Vue3FiltersConfig = {
   capitalize: {
     onlyFirstLetter: false
   },
@@ -591,7 +591,7 @@ var Vue2FiltersConfig = {
   }
 }
 
-Vue.use(Vue2Filters, Vue2FiltersConfig)
+Vue.use(Vue3Filters, Vue3FiltersConfig)
 ```
 
 ## Programmatic Usage
@@ -646,21 +646,21 @@ If you want capitalize only first letter of sentence, you just need to add the `
 
 ### Upgrade to 0.4.0 from 0.3.*
 
-In the new version it was decided to refuse from global registration of mixins, as it could lead to errors when using this package with other packages. Therefore, you need to manually add `Vue2Filters.mixin` into the mixin list of your components if you use at least one of the predefined methods (such as `limitBy`, `filterBy`, `find` or `orderBy`):
+In the new version it was decided to refuse from global registration of mixins, as it could lead to errors when using this package with other packages. Therefore, you need to manually add `Vue3Filters.mixin` into the mixin list of your components if you use at least one of the predefined methods (such as `limitBy`, `filterBy`, `find` or `orderBy`):
 
 ```js
 export default {
   ...
-  mixins: [Vue2Filters.mixin],
+  mixins: [Vue3Filters.mixin],
   ...
 }
 ```
 
-You can read more about the reasons for this change [here](https://github.com/freearhey/vue2-filters/issues/52)
+You can read more about the reasons for this change [here](https://github.com/freearhey/vue3-filters/issues/52)
 
 ## Contribution
 
-If you find a bug or want to contribute to the code or documentation, you can help by submitting an [issue](https://github.com/freearhey/vue2-filters/issues) or a [pull request](https://github.com/freearhey/vue2-filters/pulls).
+If you find a bug or want to contribute to the code or documentation, you can help by submitting an [issue](https://github.com/freearhey/vue3-filters/issues) or a [pull request](https://github.com/freearhey/vue3-filters/pulls).
 
 ## License
 

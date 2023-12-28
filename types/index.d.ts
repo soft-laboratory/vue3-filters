@@ -9,6 +9,7 @@ export type Vue3Filters = {
       filterBy: (arr: any[], search: string | number, ...args: any[]) => any[];
       orderBy: (arr: any, ...args: any[]) => any;
       find: (arr: any[], search: string | number, ...args: any[]) => any;
+      number: (n: string | number) => any
     };
   };
 } & Plugin<Vue3FiltersUseOptions>

@@ -6,7 +6,7 @@ import * as otherFilters from './other/index'
 const Vue3Filters = {
   install: function (Vue, options) {},
   mixin: {
-    methods: {...arrayFilters}
+    methods: {...arrayFilters, ...otherFilters, ...stringFilters}
   }
 };
 

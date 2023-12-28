@@ -3,6 +3,9 @@ import { Plugin } from "vue";
 declare const Vue3Filters: Vue3Filters;
 export default Vue3Filters;
 export type Vue3Filters = {
+  filters: {
+
+  };
   mixin: {
     methods: {
       limitBy: (arr: any, n: number, offset: number) => any;

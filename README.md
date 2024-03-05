@@ -2,6 +2,8 @@
 
 A collection Vue.js filters.
 
+This is 
+
 ## Installation
 
 ### Direct include
@@ -17,10 +19,8 @@ To use one of the predefined methods (such as `limitBy`, `filterBy`, `find`, or 
 
 ```html
 <script>
-  new Vue({
-    ...
-    mixins: [Vue3Filters.mixin],
-    ...
+  const app = Vue.createApp({
+    mixins: [Vue3Filters.mixin]
   })
 </script>
 ```
@@ -28,7 +28,7 @@ To use one of the predefined methods (such as `limitBy`, `filterBy`, `find`, or 
 ### CDN [![jsDelivr Hits](https://data.jsdelivr.com/v1/package/npm/vue3-filters/badge?style=rounded)](https://www.jsdelivr.com/package/npm/vue3-filters)
 
 ```html
-<script src="https://unpkg.com/vue/dist/vue.min.js"></script>
+<script src="https://unpkg.com/vue/dist/vue.global.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue3-filters/dist/vue3-filters.min.js"></script>
 ```
 
@@ -36,10 +36,8 @@ To use one of the predefined methods (such as `limitBy`, `filterBy`, `find`, or 
 
 ```html
 <script>
-  new Vue({
-    ...
-    mixins: [Vue3Filters.mixin],
-    ...
+  const app = Vue.createApp({
+    mixins: [Vue3Filters.mixin]
   })
 </script>
 ```
@@ -52,11 +50,18 @@ npm install vue3-filters
 
 When used with a module system, you must explicitly install the filters via `Vue.use()`:
 
+
 ```js
-import Vue from 'vue'
 import Vue3Filters from 'vue3-filters'
 
-Vue.use(Vue3Filters)
+export default defineNuxtPlugin((nuxtApp) => {
+  nuxtApp.vueApp.config.globalProperties.$filters = Vue3Filters.filters
+  nuxtApp.vueApp.mixin(Vue3Filters.mixin)
+})
+```
+Usage
+```js
+$filters.number(number)
 ```
 
 You don't need to do this when using global script tags.
@@ -82,10 +87,12 @@ npm install vue3-filters
 When create file `plugins/vue3-filters.js`:
 
 ```js
-import Vue from 'vue'
 import Vue3Filters from 'vue3-filters'
 
-Vue.use(Vue3Filters)
+export default defineNuxtPlugin((nuxtApp) => {
+  nuxtApp.vueApp.config.globalProperties.$filters = Vue3Filters.filters
+  nuxtApp.vueApp.mixin(Vue3Filters.mixin)
+})
 ```
 
 Then, add the file inside the `plugins` key of `nuxt.config.js`:
@@ -146,12 +153,12 @@ export default {
 + Example:
 
   ```js
-  {{ msg | capitalize }} // 'abc' => 'Abc'
+  {{ $filters.capitalize(msg)}} // 'abc' => 'Abc'
   ```
   Capitalize only first letter of sentence:
 
   ```js
-  {{ msg | capitalize({ onlyFirstLetter: true }) }} // 'lorem ipsum dolor' => 'Lorem ipsum dolor'
+  {{ $filters.capitalize(msg, capitalize({ onlyFirstLetter: true })) }} // 'lorem ipsum dolor' => 'Lorem ipsum dolor'
   ```
 
 
@@ -160,7 +167,7 @@ export default {
 + Example:
 
   ```js
-  {{ msg | uppercase }} // 'abc' => 'ABC'
+  {{ $filters.uppercase(msg) }} // 'abc' => 'ABC'
   ```
 
 #### lowercase
@@ -168,7 +175,7 @@ export default {
 + Example:
 
   ```js
-  {{ msg | lowercase }} // 'ABC' => 'abc'
+  {{ $filters.lowercase(msg) }} // 'ABC' => 'abc'
   ```
 
 #### placeholder
@@ -179,7 +186,7 @@ export default {
 + Example:
 
   ```js
-  {{ msg | placeholder('Text if msg is missing') }} // '' => 'Text if msg is missing'
+  {{ $filters.placeholder(msg, 'Text if msg is missing') }} // '' => 'Text if msg is missing'
   ```
 
 #### truncate
@@ -190,7 +197,7 @@ export default {
 + Example:
 
   ```js
-  {{ msg | truncate(10) }} // 'lorem ipsum dolor' => 'lorem ipsu...'
+  {{ $filters.truncate(msg, 10) }} // 'lorem ipsum dolor' => 'lorem ipsu...'
   ```
 
 #### repeat
@@ -201,7 +208,7 @@ export default {
 + Example:
 
   ```js
-  {{ msg | repeat(3) }} // 'a' => 'aaa'
+  {{ $filters.repeat(msg, 3) }} // 'a' => 'aaa'
   ```
 
 #### reverse
@@ -209,7 +216,7 @@ export default {
 + Example:
 
   ```js
-  {{ msg | reverse }} // 'abc' => 'cba'
+  {{ $filters.reverse(msg) }} // 'abc' => 'cba'
   ```
 
 #### wrap
@@ -220,7 +227,7 @@ export default {
 + Example:
 
   ```js
-  {{ msg | wrap('###') }} // 'ipsum' => '###ipsum###'
+  {{ $filters.wrap(msg, '###') }} // 'ipsum' => '###ipsum###'
   ```
 
 #### number
@@ -236,39 +243,39 @@ export default {
 + Examples:
 
   ```js
-  {{ 123456 | number('0,0') }} // => 123,456
+  {{ $filters.number(123456, '0,0') }} // => 123,456
   ```
 
   Change the number of digits after the decimal point:
 
   ```js
-  {{ 12345.67 | number('0.0000') }} // => 12345.6700
+  {{ $filters.number(12345.67, '0.0000') }} // => 12345.6700
   ```
 
   Add a plus or minus sign to the beginning:
 
   ```js
-  {{ 123456 | number('+0') }} // => +123456
-  {{ 123456 | number('-0') }} // => -123456
+  {{ $filters.number(123456, '+0') }} // => +123456
+  {{ $filters.number(123456, '-0') }} // => -123456
   ```
 
   Show number in thousand (K) or in millions (M):
 
   ```js
-  {{ 123456 | number('0a') }} // => 123K
-  {{ 123456 | number('0 a') }} // => 123 K
-  {{ 123456789 | number('0a') }} // => 123M
+  {{ $filters.number(123456, '0a') }} // => 123K
+  {{ $filters.number(123456, '0 a') }} // => 123 K
+  {{ $filters.number(123456789, '0a') }} // => 123M
   ```
 
   Use a different thousands separator:
 
   ```js
-  {{ 1234567 | number('0,0', { thousandsSeparator: ' ' }) }} // => 1 234 567
+  {{ $filters.number(1234567, '0,0', { thousandsSeparator: ' ' }) }} // => 1 234 567
   ```
   Use a different decimal separator:
 
   ```js
-  {{ 12345.67 | number('0.00', { decimalSeparator: '|' }) }} // => 12,345|67
+  {{ $filters.number(12345.67, '0.00', { decimalSeparator: '|' }) }} // => 12,345|67
   ```
 
 #### bytes
@@ -279,18 +286,18 @@ export default {
 + Examples:
 
   ```js
-  {{ 1 | bytes }}              // => 1 byte
-  {{ 20 | bytes }}             // => 20 bytes
-  {{ 2000 | bytes }}           // => 1.95 kB
-  {{ 2000000 | bytes }}        // => 1.91 MB
-  {{ 2000000000 | bytes }}     // => 1.86 GB
-  {{ 2000000000000 | bytes }}  // => 1.82 TB
+  {{ $filters.bytes(1) }}              // => 1 byte
+  {{ $filters.bytes(20) }}             // => 20 bytes
+  {{ $filters.bytes(2000) }}           // => 1.95 kB
+  {{ $filters.bytes(2000000) }}        // => 1.91 MB
+  {{ $filters.bytes(2000000000) }}     // => 1.86 GB
+  {{ $filters.bytes(2000000000000) }}  // => 1.82 TB
   ```
 
   Change the number of digits after the decimal point:
 
   ```js
-  {{ 2000000000 | bytes(4) }}  // => 1.8626 GB
+  {{ $filters.bytes(2000000000, 4) }}  // => 1.8626 GB
   ```
 
 #### percent
@@ -306,29 +313,29 @@ export default {
 + Examples:
 
   ```js
-  {{ 0.01 | percent }} // => 1%
-  {{ 0.1 | percent }} // => 10%
-  {{ 1 | percent }} // => 100%
-  {{ 100 | percent }} // => 10000%
-  {{ 0.97 | percent }} // => 97%
+  {{ $filters.percent(0.01) }} // => 1%
+  {{ $filters.percent(0.1) }} // => 10%
+  {{ $filters.percent(1) }} // => 100%
+  {{ $filters.percent(100) }} // => 10000%
+  {{ $filters.percent(0.97) }} // => 97%
   ```
 
   Change the number of digits after the decimal point:
 
   ```js
-  {{ 0.974878234 | percent(3) }} // => 97.488%
+  {{ $filters.percent(0.974878234, 3) }} // => 97.488%
   ```
 
   Change the multiplier:
 
   ```js
-  {{ 0.974878234 | percent(3, 150) }} // => 146.232%
+  {{ $filters.percent(0.974878234, 3, 150) }} // => 146.232%
   ```
 
   Use a different decimal separator:
 
   ```js
-  {{ 0.07 | percent(2, 100, { decimalSeparator: '|' }) }} // => 7|00%
+  {{ $filters.percent(0.07, 2, 100, { decimalSeparator: '|' }) }} // => 7|00%
   ```
 
 #### currency
@@ -348,48 +355,48 @@ export default {
 + Example:
 
   ```js
-  {{ amount | currency }} // 12345 => $12,345.00
+  {{ $filters.currency(amount) }} // 12345 => $12,345.00
   ```
   Use a different symbol:
 
   ```js
-  {{ amount | currency('£') }} // 12345 => £12,345.00
+  {{ $filters.currency(amount, '£') }} // 12345 => £12,345.00
   ```
   Use a different number decimal places:
 
   ```js
-  {{ amount | currency('₽', 0) }} // 12345 => ₽12,345
+  {{ $filters.currency(amount, '₽', 0) }} // 12345 => ₽12,345
   ```
   Use a different thousands separator:
 
   ```js
-  {{ amount | currency('$', 0, { thousandsSeparator: '.' }) }} // 12345 => $12.345
+  {{ $filters.currency(amount, '$', 0, { thousandsSeparator: '.' }) }} // 12345 => $12.345
   ```
   Use a different decimal separator:
 
   ```js
-  {{ amount | currency('$', 2, { decimalSeparator: ',' }) }} // 12345 => $12,345,00
+  {{ $filters.currency(amount, '$', 2, { decimalSeparator: ',' }) }} // 12345 => $12,345,00
   ```
   Use symbol on right:
 
   ```js
-  {{ amount | currency('$', 0, { symbolOnLeft: false }) }} // 12345 => 12,345$
+  {{ $filters.currency(amount, '$', 0, { symbolOnLeft: false }) }} // 12345 => 12,345$
   ```
   Add space between amount and symbol:
 
   ```js
-  {{ amount | currency('$', 0, { spaceBetweenAmountAndSymbol: true }) }} // 12345 => $ 12,345
+  {{ $filters.currency(amount, '$', 0, { spaceBetweenAmountAndSymbol: true }) }} // 12345 => $ 12,345
   ```
 
   Show the plus sign if the value is greater than zero:
 
   ```js
-  {{ amount | currency('$', 0, { showPlusSign: true }) }} // 12345 => +$12,345
+  {{ $filters.currency(amount, '$', 0, { showPlusSign: true }) }} // 12345 => +$12,345
   ```
   Use multiple options:
 
   ```js
-  {{ amount | currency('kr', 2, { symbolOnLeft: false, spaceBetweenAmountAndSymbol: true }) }} // 12345 => 12,345.00 kr
+  {{ $filters.currency(amount, 'kr', 2, { symbolOnLeft: false, spaceBetweenAmountAndSymbol: true }) }} // 12345 => 12,345.00 kr
   ```
 
 #### pluralize
@@ -404,7 +411,7 @@ export default {
 + Example:
 
   ```js
-  {{ count }} {{ count | pluralize('item') }} 
+  {{ count }} {{ $filters.pluralize(count, 'item') }} 
 
   // 1 => '1 item'
   // 2 => '2 items'
@@ -413,7 +420,7 @@ export default {
   Use an array of words:
 
   ```js
-  {{ count }} {{ count | pluralize(['fry', 'fries']) }} 
+  {{ count }} {{ $filters.pluralize(count, ['fry', 'fries']) }} 
 
   // 1 => '1 fry'
   // 2 => '2 fries'
@@ -423,7 +430,7 @@ export default {
   Include number to output:
 
   ```js
-  {{ count | pluralize('test', { includeNumber: true }) }} 
+  {{ $filters.pluralize(count, 'test', { includeNumber: true }) }} 
 
   // 1 => '1 test'
   // 2 => '2 tests'
@@ -440,7 +447,7 @@ export default {
 + Example:
 
   ```js
-  {{ date | ordinal }} 
+  {{ $filters.ordinal(date) }} 
 
   // 1 => 'st'
   // 2 => 'nd'
@@ -452,7 +459,7 @@ export default {
   Include number to output:
 
   ```js
-  {{ date | ordinal({ includeNumber: true }) }} 
+  {{ $filters.ordinal(date, { includeNumber: true }) }} 
 
   // 1 => '1st'
   // 2 => '2nd'
@@ -623,13 +630,13 @@ this.limitBy([1,2,3,4,5], 2) // => [1,2]
 The `pluralize` filter arguments order has been changed. In the new version to specify several variants of words you can do this by passing an array as first argument, like so:
 
 ```js
-{{ count | pluralize(['item', 'items']) }}
+{{ $filters.pluralize(count, ['item', 'items']) }}
 ````
 
 In addition, the function of translate a regular number to its ordinal representation was removed from the `pluralize` filter. Now there is a separate `ordinal` filter for this:
 
 ```js
-{{ count | ordinal }}
+{{ $filters.ordinal(count) }}
 ```
 
 ### Upgrade to 0.5.0 from 0.4.*
@@ -641,7 +648,7 @@ To match the definition of the word "capitalize", the default filter behavior ha
 If you want capitalize only first letter of sentence, you just need to add the `onlyFirstLetter` parameter to the filter, like so:
 
 ```js
-{{ msg | capitalize({ onlyFirstLetter: true }) }}
+{{ $filters.capitalize(msg, { onlyFirstLetter: true }) }}
 ```
 
 ### Upgrade to 0.4.0 from 0.3.*

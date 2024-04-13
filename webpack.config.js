@@ -3,8 +3,8 @@ var UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
   entry: {
-    'vue2-filters': './src/index.js',
-    'vue2-filters.min': './src/index.js'
+    'vue3-filters': './src/index.js',
+    'vue3-filters.min': './src/index.js'
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
